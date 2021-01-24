@@ -15,3 +15,13 @@ pub enum Value {
     Atom(Atom),
     Cons(Cons),
 }
+
+impl Value {
+    pub fn is_nil(&self) -> bool {
+        matches!(self, Value::Atom(Atom::Nil))
+    }
+
+    pub fn is_atom(&self) -> bool {
+        matches!(self, Value::Atom(_))
+    }
+}

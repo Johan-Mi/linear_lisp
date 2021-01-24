@@ -1,5 +1,5 @@
 use super::error::Error;
-use super::types::{Atom, Cons, Nil, Symbol, Value};
+use super::types::{Atom, Cons, Nil, Value};
 use std::mem;
 
 pub fn swap(a: &mut Value, b: &mut Value) {
@@ -24,14 +24,6 @@ pub fn swap_with_cdr(a: &mut Value, b: &mut Value) -> Result<(), Error> {
     }
 }
 
-pub fn is_nil(v: &Value) -> bool {
-    matches!(v, Value::Atom(Atom::Nil))
-}
-
-pub fn is_atom(v: &Value) -> bool {
-    matches!(v, Value::Atom(_))
-}
-
 pub fn eq(lhs: &Atom, rhs: &Atom) -> bool {
     match (lhs, rhs) {
         (Atom::Nil, Atom::Nil) => Nil == Nil,
@@ -51,7 +43,7 @@ pub fn push(a: &mut Value, b: &mut Value) {
 }
 
 pub fn pop(a: &mut Value, b: &mut Value) -> Result<(), Error> {
-    if is_nil(a) {
+    if a.is_nil() {
         if let Value::Cons(Cons(lhs, rhs)) =
             mem::replace(b, Value::Atom(Atom::Nil))
         {

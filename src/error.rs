@@ -2,10 +2,6 @@ use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum Error {
-    #[error("tried to call eq() with a Cons")]
-    EqCons,
-    #[error("tried to call assign() on a Cons")]
-    AssignToCons,
     #[error("tried to call swap_with_car() on an Atom")]
     SwapWithCarAtom,
     #[error("tried to call swap_with_cdr() on an Atom")]
