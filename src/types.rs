@@ -1,16 +1,19 @@
 #[derive(PartialEq, Eq)]
 pub struct Nil;
 
-#[derive(PartialEq, Eq)]
+#[derive(Clone, PartialEq, Eq)]
 pub struct Symbol(String);
 
+#[derive(Clone)]
 pub struct Cons(pub Box<Value>, pub Box<Value>);
 
+#[derive(Clone)]
 pub enum Atom {
     Nil,
     Symbol(Symbol),
 }
 
+#[derive(Clone)]
 pub enum Value {
     Atom(Atom),
     Cons(Cons),

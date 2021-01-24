@@ -57,3 +57,27 @@ pub fn pop(a: &mut Value, b: &mut Value) -> Result<(), Error> {
         Err(Error::PopIntoNonNil)
     }
 }
+
+pub fn free(v: &mut Value) {
+    *v = Value::Atom(Atom::Nil);
+}
+
+pub fn copy(src: &Value, dest: &mut Value) -> Result<(), Error> {
+    if dest.is_nil() {
+        *dest = src.clone();
+        Ok(())
+    } else {
+        Err(Error::CopyIntoNonNil)
+    }
+}
+
+pub fn equal(lhs: &Value, rhs: &Value) -> bool {
+    match (lhs, rhs) {
+        (
+            Value::Cons(Cons(lhs_car, lhs_cdr)),
+            Value::Cons(Cons(rhs_car, rhs_cdr)),
+        ) => equal(lhs_car, rhs_car) && equal(lhs_cdr, rhs_cdr),
+        (Value::Atom(lhs), Value::Atom(rhs)) => eq(lhs, rhs),
+        _ => false,
+    }
+}

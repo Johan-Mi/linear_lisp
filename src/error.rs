@@ -10,4 +10,6 @@ pub enum Error {
     PopIntoNonNil,
     #[error("tried to call pop() with an Atom as source")]
     PopFromAtom,
+    #[error("tried to call copy() with a non-Nil value as destination")]
+    CopyIntoNonNil,
 }
