@@ -1,5 +1,5 @@
 use super::error::Error;
-use super::types::{Atom, Cons, Nil, Value};
+use super::types::{Atom, Cons, Value};
 use std::mem;
 
 pub fn swap(a: &mut Value, b: &mut Value) {
