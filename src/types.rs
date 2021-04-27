@@ -13,10 +13,24 @@ pub enum Atom {
     Symbol(Symbol),
 }
 
+impl Default for Atom {
+    /// Returns the empty value `Nil`
+    fn default() -> Self {
+        Self::Nil
+    }
+}
+
 #[derive(Clone)]
 pub enum Value {
     Atom(Atom),
     Cons(Cons),
+}
+
+impl Default for Value {
+    /// Returns the empty value `Nil`
+    fn default() -> Self {
+        Self::Atom(Atom::default())
+    }
 }
 
 impl Value {

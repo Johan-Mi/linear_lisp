@@ -1,6 +1,6 @@
 use super::error::Error;
 use super::types::{Atom, Cons, Value};
-use std::mem::{self, swap};
+use std::mem::{swap, take};
 
 pub fn swap_with_car(a: &mut Value, b: &mut Value) -> Result<(), Error> {
     if let Value::Cons(Cons(car, _cdr)) = b {
@@ -33,16 +33,14 @@ pub fn assign(dest: &mut Atom, src: Atom) {
 }
 
 pub fn push(a: &mut Value, b: &mut Value) {
-    let car = mem::replace(a, Value::Atom(Atom::Nil));
-    let cdr = mem::replace(b, Value::Atom(Atom::Nil));
+    let car = take(a);
+    let cdr = take(b);
     *b = Value::Cons(Cons(Box::new(car), Box::new(cdr)));
 }
 
 pub fn pop(a: &mut Value, b: &mut Value) -> Result<(), Error> {
     if a.is_nil() {
-        if let Value::Cons(Cons(lhs, rhs)) =
-            mem::replace(b, Value::Atom(Atom::Nil))
-        {
+        if let Value::Cons(Cons(lhs, rhs)) = take(b) {
             *a = *lhs;
             *b = *rhs;
             Ok(())
