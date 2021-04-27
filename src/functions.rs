@@ -1,14 +1,10 @@
 use super::error::Error;
 use super::types::{Atom, Cons, Value};
-use std::mem;
-
-pub fn swap(a: &mut Value, b: &mut Value) {
-    mem::swap(a, b);
-}
+use std::mem::{self, swap};
 
 pub fn swap_with_car(a: &mut Value, b: &mut Value) -> Result<(), Error> {
     if let Value::Cons(Cons(car, _cdr)) = b {
-        mem::swap(a, car);
+        swap(a, car);
         Ok(())
     } else {
         Err(Error::SwapWithCarAtom)
@@ -17,7 +13,7 @@ pub fn swap_with_car(a: &mut Value, b: &mut Value) -> Result<(), Error> {
 
 pub fn swap_with_cdr(a: &mut Value, b: &mut Value) -> Result<(), Error> {
     if let Value::Cons(Cons(_car, cdr)) = b {
-        mem::swap(a, cdr);
+        swap(a, cdr);
         Ok(())
     } else {
         Err(Error::SwapWithCdrAtom)
