@@ -26,7 +26,7 @@ pub fn swap_with_cdr(a: &mut Value, b: &mut Value) -> Result<(), Error> {
 
 pub fn eq(lhs: &Atom, rhs: &Atom) -> bool {
     match (lhs, rhs) {
-        (Atom::Nil, Atom::Nil) => Nil == Nil,
+        (Atom::Nil, Atom::Nil) => true,
         (Atom::Symbol(lhs), Atom::Symbol(rhs)) => lhs == rhs,
         _ => false,
     }
