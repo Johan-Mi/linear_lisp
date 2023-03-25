@@ -34,11 +34,11 @@ impl Default for Value {
 }
 
 impl Value {
-    pub fn is_nil(&self) -> bool {
-        matches!(self, Value::Atom(Atom::Nil))
+    pub const fn is_nil(&self) -> bool {
+        matches!(self, Self::Atom(Atom::Nil))
     }
 
-    pub fn is_atom(&self) -> bool {
-        matches!(self, Value::Atom(_))
+    pub const fn is_atom(&self) -> bool {
+        matches!(self, Self::Atom(_))
     }
 }
